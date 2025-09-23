@@ -11,6 +11,7 @@
 
     <artifactId>api</artifactId>
     <packaging>jar</packaging>
+    <name>api</name>
 
     <properties>
         <jackson.version>2.14.2</jackson.version>
@@ -22,6 +23,18 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Тестовые зависимости -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
