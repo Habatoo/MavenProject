@@ -20,7 +20,6 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.version>1.0-SNAPSHOT</project.version>
-        <itCoverageAgent></itCoverageAgent>
         <!-- Версии зависимостей -->
         <junit.version>5.9.2</junit.version>
         <mockito.version>5.20.0</mockito.version>
@@ -130,17 +129,6 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
-                    </execution>
-                    <!-- prepare agent for measuring integration tests -->
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                        <phase>pre-integration-test</phase>
-                        <configuration>
-                            <propertyName>itCoverageAgent</propertyName>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
