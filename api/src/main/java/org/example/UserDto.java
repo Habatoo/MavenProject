@@ -24,7 +24,3 @@ public class UserDto {
         return status == UserStatus.ACTIVE;
     }
 }
-
-enum UserStatus {
-    ACTIVE, INACTIVE, PENDING
-}
