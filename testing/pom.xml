@@ -51,6 +51,8 @@
                         --add-opens java.base/java.io=ALL-UNNAMED
                         -Dfile.encoding=UTF-8
                         -Djdk.attach.allowAttachSelf=true
+                        -XX:+EnableDynamicAgentLoading
+                        -Xshare:off
                     </argLine>
                     <systemPropertyVariables>
                         <jdk.attach.allowAttachSelf>true</jdk.attach.allowAttachSelf>

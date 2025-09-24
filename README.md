@@ -10,3 +10,6 @@ mvn versions:display-plugin-updates
 
 ./mvnw dependency:resolve-plugins
 # Покажет, что плагины используют версии из BOM
+
+
+./mvnw enforcer:enforce

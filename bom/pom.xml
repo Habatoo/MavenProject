@@ -73,4 +73,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip> <!-- Пропустить проверку для BOM -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
