@@ -21,11 +21,13 @@
         <maven.compiler.prod.release>21</maven.compiler.prod.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.version>1.0-SNAPSHOT</project.version>
+        <clean.skip>false</clean.skip>
         <!-- Версии зависимостей -->
         <lombok.version>1.18.42</lombok.version>
         <byte.buddy.version>1.17.7</byte.buddy.version>
         <!-- Версии plugin зависимостей -->
         <versions.ignore>alpha,beta,rc,cr,m[0-9],-M[0-9]</versions.ignore>
+        <maven.clean.plugin.version>3.5.0</maven.clean.plugin.version>
         <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
         <maven.enforcer.plugin.version>3.5.0</maven.enforcer.plugin.version>
         <maven.dependency.plugin.version>3.8.1</maven.dependency.plugin.version>
@@ -81,6 +83,12 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven.clean.plugin.version}</version>
+                </plugin>
+
                 <!-- Компилятор с Lombok -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -142,9 +150,9 @@
                     <version>${maven.surefire.plugin.version}</version>
                 </plugin>
                 <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${maven.jacoco.plugin.version}</version>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${maven.jacoco.plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -153,16 +161,45 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <skip>${clean.skip}</skip>  <!-- mvn clean -Dclean.skip=true -->
+                    <filesets>
+                        <fileset>
+                            <directory>target/output</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/config.xml</exclude>
+                                <exclude>**/readme.txt</exclude>
+                            </excludes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>clean-output-directory</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>${maven.enforcer.plugin.version}</version>
                 <configuration>
                     <rules>
-                        <dependencyConvergence />
-                        <requireUpperBoundDeps />
+                        <dependencyConvergence/>
+                        <requireUpperBoundDeps/>
                         <requireMavenVersion>
                             <version>[3.6.3,)</version>
                         </requireMavenVersion>

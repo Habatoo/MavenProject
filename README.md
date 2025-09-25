@@ -20,3 +20,12 @@ https://habr.com/ru/articles/264505/
 # Активация prov профиля
 ./mvnw clean install -Pprod
 ./mvnw clean install -Denv=prod 
+
+# Кастомная стадия clean - Просмотр что будет очищено (dry-run)
+./mvnw clean:clean "-Dclean.verbose=true" "-Dclean.skip=true"
+
+## Запуск только фазы initialize
+mvn initialize
+
+## Пропуск очистки
+mvn initialize "-Dclean.skip=true"
